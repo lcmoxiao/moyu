@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.StrMapper">
+    <resultMap id="BaseResultMap" type="com.jlp.pojo.Str">
+        <id column="sId" jdbcType="INTEGER" property="sid"/>
+        <result column="sType" jdbcType="TINYINT" property="stype"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        sId, sType
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from str
+        where sId = #{sid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from str
+        where sId = #{sid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.jlp.pojo.Str" useGeneratedKeys="true" keyProperty="sId">
+        insert into str (sType)
+        values (#{stype,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jlp.pojo.Str">
+        insert into str
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sid != null">
+                sId,
+            </if>
+            <if test="stype != null">
+                sType,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sid != null">
+                #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="stype != null">
+                #{stype,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jlp.pojo.Str">
+        update str
+        <set>
+            <if test="stype != null">
+                sType = #{stype,jdbcType=TINYINT},
+            </if>
+        </set>
+        where sId = #{sid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jlp.pojo.Str">
+        update str
+        set sType = #{stype,jdbcType=TINYINT}
+        where sId = #{sid,jdbcType=INTEGER}
+    </update>
+    <resultMap id="BaseResultMap" type="com.jlp.pojo.Str">
+        <id column="sId" jdbcType="INTEGER" property="sid"/>
+        <result column="sType" jdbcType="TINYINT" property="stype"/>
+    </resultMap>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.jlp.pojo.Report">
+    <id column="rId" jdbcType="INTEGER" property="rid" />
+    <result column="rTime" jdbcType="TIMESTAMP" property="rtime" />
+    <result column="rReason" jdbcType="VARCHAR" property="rreason" />
+    <result column="rSId" jdbcType="INTEGER" property="rsid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rId, rTime, rReason, rSId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where rId = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from report
+    where rId = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlp.pojo.Report">
+    insert into report (rId, rTime, rReason, 
+      rSId)
+    values (#{rid,jdbcType=INTEGER}, #{rtime,jdbcType=TIMESTAMP}, #{rreason,jdbcType=VARCHAR}, 
+      #{rsid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlp.pojo.Report">
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rId,
+      </if>
+      <if test="rtime != null">
+        rTime,
+      </if>
+      <if test="rreason != null">
+        rReason,
+      </if>
+      <if test="rsid != null">
+        rSId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="rtime != null">
+        #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rreason != null">
+        #{rreason,jdbcType=VARCHAR},
+      </if>
+      <if test="rsid != null">
+        #{rsid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlp.pojo.Report">
+    update report
+    <set>
+      <if test="rtime != null">
+        rTime = #{rtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rreason != null">
+        rReason = #{rreason,jdbcType=VARCHAR},
+      </if>
+      <if test="rsid != null">
+        rSId = #{rsid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rId = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlp.pojo.Report">
+    update report
+    set rTime = #{rtime,jdbcType=TIMESTAMP},
+      rReason = #{rreason,jdbcType=VARCHAR},
+      rSId = #{rsid,jdbcType=INTEGER}
+    where rId = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

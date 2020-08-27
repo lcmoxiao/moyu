@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.MovieMapper">
+  <resultMap id="BaseResultMap" type="com.jlp.pojo.Movie">
+    <id column="mId" jdbcType="INTEGER" property="mid" />
+    <result column="mPublishTime" jdbcType="TIMESTAMP" property="mpublishtime" />
+    <result column="mPublishIP" jdbcType="VARCHAR" property="mpubliship" />
+    <result column="mPublishName" jdbcType="VARCHAR" property="mpublishname" />
+    <result column="mContent" jdbcType="VARCHAR" property="mcontent" />
+    <result column="mFatherId" jdbcType="INTEGER" property="mfatherid" />
+    <result column="mGreat" jdbcType="INTEGER" property="mgreat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mId, mPublishTime, mPublishIP, mPublishName, mContent, mFatherId, mGreat
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from movie
+    where mId = #{mid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from movie
+    where mId = #{mid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlp.pojo.Movie">
+    insert into movie (mId, mPublishTime, mPublishIP, 
+      mPublishName, mContent, mFatherId, 
+      mGreat)
+    values (#{mid,jdbcType=INTEGER}, #{mpublishtime,jdbcType=TIMESTAMP}, #{mpubliship,jdbcType=VARCHAR}, 
+      #{mpublishname,jdbcType=VARCHAR}, #{mcontent,jdbcType=VARCHAR}, #{mfatherid,jdbcType=INTEGER}, 
+      #{mgreat,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlp.pojo.Movie">
+    insert into movie
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        mId,
+      </if>
+      <if test="mpublishtime != null">
+        mPublishTime,
+      </if>
+      <if test="mpubliship != null">
+        mPublishIP,
+      </if>
+      <if test="mpublishname != null">
+        mPublishName,
+      </if>
+      <if test="mcontent != null">
+        mContent,
+      </if>
+      <if test="mfatherid != null">
+        mFatherId,
+      </if>
+      <if test="mgreat != null">
+        mGreat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mpublishtime != null">
+        #{mpublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mpubliship != null">
+        #{mpubliship,jdbcType=VARCHAR},
+      </if>
+      <if test="mpublishname != null">
+        #{mpublishname,jdbcType=VARCHAR},
+      </if>
+      <if test="mcontent != null">
+        #{mcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="mfatherid != null">
+        #{mfatherid,jdbcType=INTEGER},
+      </if>
+      <if test="mgreat != null">
+        #{mgreat,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlp.pojo.Movie">
+    update movie
+    <set>
+      <if test="mpublishtime != null">
+        mPublishTime = #{mpublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mpubliship != null">
+        mPublishIP = #{mpubliship,jdbcType=VARCHAR},
+      </if>
+      <if test="mpublishname != null">
+        mPublishName = #{mpublishname,jdbcType=VARCHAR},
+      </if>
+      <if test="mcontent != null">
+        mContent = #{mcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="mfatherid != null">
+        mFatherId = #{mfatherid,jdbcType=INTEGER},
+      </if>
+      <if test="mgreat != null">
+        mGreat = #{mgreat,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mId = #{mid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlp.pojo.Movie">
+    update movie
+    set mPublishTime = #{mpublishtime,jdbcType=TIMESTAMP},
+      mPublishIP = #{mpubliship,jdbcType=VARCHAR},
+      mPublishName = #{mpublishname,jdbcType=VARCHAR},
+      mContent = #{mcontent,jdbcType=VARCHAR},
+      mFatherId = #{mfatherid,jdbcType=INTEGER},
+      mGreat = #{mgreat,jdbcType=INTEGER}
+    where mId = #{mid,jdbcType=INTEGER}
+  </update>
+</mapper>

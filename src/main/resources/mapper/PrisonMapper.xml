@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.PrisonMapper">
+  <resultMap id="BaseResultMap" type="com.jlp.pojo.Prison">
+    <id column="pId" jdbcType="INTEGER" property="pid" />
+    <result column="pIP" jdbcType="VARCHAR" property="pip" />
+    <result column="pStartTime" jdbcType="TIMESTAMP" property="pstarttime" />
+    <result column="pSId" jdbcType="INTEGER" property="psid" />
+    <result column="pReason" jdbcType="VARCHAR" property="preason" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pId, pIP, pStartTime, pSId, pReason
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prison
+    where pId = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prison
+    where pId = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jlp.pojo.Prison">
+    insert into prison (pId, pIP, pStartTime, 
+      pSId, pReason)
+    values (#{pid,jdbcType=INTEGER}, #{pip,jdbcType=VARCHAR}, #{pstarttime,jdbcType=TIMESTAMP}, 
+      #{psid,jdbcType=INTEGER}, #{preason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlp.pojo.Prison">
+    insert into prison
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pId,
+      </if>
+      <if test="pip != null">
+        pIP,
+      </if>
+      <if test="pstarttime != null">
+        pStartTime,
+      </if>
+      <if test="psid != null">
+        pSId,
+      </if>
+      <if test="preason != null">
+        pReason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pip != null">
+        #{pip,jdbcType=VARCHAR},
+      </if>
+      <if test="pstarttime != null">
+        #{pstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psid != null">
+        #{psid,jdbcType=INTEGER},
+      </if>
+      <if test="preason != null">
+        #{preason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlp.pojo.Prison">
+    update prison
+    <set>
+      <if test="pip != null">
+        pIP = #{pip,jdbcType=VARCHAR},
+      </if>
+      <if test="pstarttime != null">
+        pStartTime = #{pstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="psid != null">
+        pSId = #{psid,jdbcType=INTEGER},
+      </if>
+      <if test="preason != null">
+        pReason = #{preason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pId = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlp.pojo.Prison">
+    update prison
+    set pIP = #{pip,jdbcType=VARCHAR},
+      pStartTime = #{pstarttime,jdbcType=TIMESTAMP},
+      pSId = #{psid,jdbcType=INTEGER},
+      pReason = #{preason,jdbcType=VARCHAR}
+    where pId = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>
