@@ -25,6 +25,6 @@ public class AjaxLogoutSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         logger.info("Logout successfully, session id: {}", request.getSession().getId());
-        request.getRequestDispatcher("/hello").forward(request, response);
+        request.getRequestDispatcher("/hello.html").forward(request, response);
     }
 }

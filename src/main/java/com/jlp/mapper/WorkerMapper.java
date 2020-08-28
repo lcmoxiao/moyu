@@ -1,9 +1,10 @@
 package com.jlp.mapper;
 
 import com.jlp.pojo.Worker;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
-@Mapper
+import java.util.List;
+
 public interface WorkerMapper {
     int deleteByPrimaryKey(Integer uid);
 
@@ -16,4 +17,10 @@ public interface WorkerMapper {
     int updateByPrimaryKeySelective(Worker record);
 
     int updateByPrimaryKey(Worker record);
+
+    @Select("select * from worker")
+    List<Worker> selectAll();
+
+    @Select("select * from worker where username = '${username}'")
+    Worker selectByUsername(String s);
 }

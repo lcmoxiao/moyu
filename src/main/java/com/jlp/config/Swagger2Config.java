@@ -23,10 +23,10 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Controller文档")
+                .title("摸鱼接口文档")
                 .description("不懂就问")
                 .termsOfServiceUrl("http://localhost:80/")//相关网站地址
-                .version("2.0") //版本号，在标题旁边
+                .version("1.0") //版本号，在标题旁边
                 .build();
     }
 }

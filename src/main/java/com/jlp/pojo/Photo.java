@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import java.util.Date;
 
-
 @Getter
 @Setter
 @ToString
@@ -23,6 +22,9 @@ public class Photo {
 
     private Integer pfatherid;
 
-    private String pgreat;
+    private Integer pgreat;
 
+    private String ptitle;
+
+    private String pdesc;
 }

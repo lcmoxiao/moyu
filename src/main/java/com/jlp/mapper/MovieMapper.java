@@ -1,9 +1,10 @@
 package com.jlp.mapper;
 
 import com.jlp.pojo.Movie;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
-@Mapper
+import java.util.List;
+
 public interface MovieMapper {
     int deleteByPrimaryKey(Integer mid);
 
@@ -11,9 +12,16 @@ public interface MovieMapper {
 
     int insertSelective(Movie record);
 
-    Movie selectByPrimaryKey(Integer mid);
-
     int updateByPrimaryKeySelective(Movie record);
 
     int updateByPrimaryKey(Movie record);
+
+    List<Movie> selectPidEqualFid();
+
+    List<Movie> selectByFid(Integer fatherId);
+
+    void addGreat(Integer mid);
+
+    @Select("select * from braggart where mId = #{mid}")
+    List<Movie> selectByMid(Integer mid);
 }

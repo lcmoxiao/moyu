@@ -1,9 +1,10 @@
 package com.jlp.mapper;
 
 import com.jlp.pojo.Prison;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
-@Mapper
+import java.util.List;
+
 public interface PrisonMapper {
     int deleteByPrimaryKey(Integer pid);
 
@@ -16,4 +17,10 @@ public interface PrisonMapper {
     int updateByPrimaryKeySelective(Prison record);
 
     int updateByPrimaryKey(Prison record);
+
+    @Select("select * from prison")
+    List<Prison> selectAll();
+
+    @Select("select * from prison where pIP = '${pip}'")
+    Prison selectByIP(String pip);
 }

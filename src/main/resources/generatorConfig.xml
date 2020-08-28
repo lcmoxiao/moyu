@@ -42,35 +42,35 @@
         </javaClientGenerator>
 
 
-<!--        <table tableName="prison"-->
-<!--               domainObjectName="Prison" enableCountByExample="false"-->
-<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
-<!--        </table>-->
+        <table tableName="prison"
+               domainObjectName="Prison" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
 
-<!--        <table tableName="braggart"-->
-<!--               domainObjectName="Braggart" enableCountByExample="false"-->
-<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
-<!--        </table>-->
+        <table tableName="braggart"
+               domainObjectName="Braggart" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
 
-<!--        <table tableName="movie"-->
-<!--               domainObjectName="Movie" enableCountByExample="false"-->
-<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
-<!--        </table>-->
+        <table tableName="movie"
+               domainObjectName="Movie" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
 
-<!--        <table tableName="photo"-->
-<!--               domainObjectName="Photo" enableCountByExample="false"-->
-<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
-<!--        </table>-->
+        <table tableName="photo"
+               domainObjectName="Photo" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
 
-<!--        <table tableName="report"-->
-<!--               domainObjectName="Report" enableCountByExample="false"-->
-<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
-<!--        </table>-->
+        <table tableName="report"
+               domainObjectName="Report" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
 
         <table tableName="str"
                domainObjectName="Str" enableCountByExample="false"
@@ -78,11 +78,11 @@
                enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
 
-<!--        <table tableName="worker"-->
-<!--               domainObjectName="Worker" enableCountByExample="false"-->
-<!--               enableUpdateByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" selectByExampleQueryId="false">-->
-<!--        </table>-->
+        <table tableName="worker"
+               domainObjectName="Worker" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
 
     </context>
 </generatorConfiguration>

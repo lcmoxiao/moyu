@@ -24,5 +24,8 @@ public class Movie {
 
     private Integer mgreat;
 
+    private String mtitle;
+
+    private String mdesc;
 
 }

@@ -10,7 +10,6 @@ import java.util.Date;
 @Setter
 @ToString
 public class Braggart {
-
     private Integer bid;
 
     private Date bpublishtime;
@@ -25,5 +24,7 @@ public class Braggart {
 
     private Integer bgreat;
 
+    private String btitle;
 
+    private String bdesc;
 }

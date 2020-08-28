@@ -1,9 +1,11 @@
 package com.jlp.mapper;
 
+import com.jlp.pojo.Braggart;
 import com.jlp.pojo.Photo;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
-@Mapper
+import java.util.List;
+
 public interface PhotoMapper {
     int deleteByPrimaryKey(Integer pid);
 
@@ -11,9 +13,16 @@ public interface PhotoMapper {
 
     int insertSelective(Photo record);
 
-    Photo selectByPrimaryKey(Integer pid);
-
     int updateByPrimaryKeySelective(Photo record);
 
     int updateByPrimaryKey(Photo record);
+
+    List<Photo> selectPidEqualFid();
+
+    List<Photo> selectByFid(Integer pfatherId);
+
+    void addGreat(Integer pid);
+
+    @Select("select * from braggart where pId = #{pid}")
+    List<Photo> selectByPid(Integer pid);
 }

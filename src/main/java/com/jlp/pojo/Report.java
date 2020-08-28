@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import java.util.Date;
 
-
 @Getter
 @Setter
 @ToString
@@ -18,5 +17,4 @@ public class Report {
     private String rreason;
 
     private Integer rsid;
-
 }
