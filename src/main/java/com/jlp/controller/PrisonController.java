@@ -2,6 +2,7 @@ package com.jlp.controller;
 
 import com.jlp.mapper.PrisonMapper;
 import com.jlp.pojo.Prison;
+import com.jlp.service.PrisonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -20,12 +21,12 @@ public class PrisonController {
 
     final static Logger logger = LoggerFactory.getLogger(PrisonController.class);
     @Resource
-    PrisonMapper prisonMapper;
+    PrisonService prisonService;
 
     @ApiOperation(value = "获取所有的封禁信息")
     @GetMapping
     List<Prison> getPrison() {
-        return prisonMapper.selectAll();
+        return prisonService.selectAll();
     }
 
     @ApiOperation(value = "新增封禁信息,需传入pip psid preason（封禁IP 相关串号 封禁理由）")
@@ -33,13 +34,13 @@ public class PrisonController {
     Integer postPrison(Prison prison) {
         logger.info("封禁了" + prison.getPip());
         prison.setPstarttime(nowTime());
-        return prisonMapper.insert(prison);
+        return prisonService.insert(prison);
     }
 
     @ApiOperation(value = "删除指定的封禁信息")
     @DeleteMapping("/{pid}")
     Integer delPrison(@PathVariable Integer pid) {
-        return prisonMapper.deleteByPrimaryKey(pid);
+        return prisonService.deleteByPrimaryKey(pid);
     }
 
 

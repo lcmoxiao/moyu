@@ -6,24 +6,12 @@ import java.util.List;
 public class PageInfoImpl<V> implements PageInfo<V> {
 
     private List<V> content;
-    private int now = 0;
-    private int size = 10;
-
-    public PageInfoImpl(List<V> content) {
-        this.content = content;
-    }
+    private int now;
+    private int size;
 
     public PageInfoImpl(List<V> content, int now, int size) {
         this.content = content;
         this.now = now;
-        this.size = size;
-    }
-
-    public int getContentSize() {
-        return content.size();
-    }
-
-    public void setPageSize(int size) {
         this.size = size;
     }
 

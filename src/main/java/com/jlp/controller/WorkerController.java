@@ -1,7 +1,7 @@
 package com.jlp.controller;
 
-import com.jlp.mapper.WorkerMapper;
 import com.jlp.pojo.Worker;
+import com.jlp.service.WorkerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -20,25 +20,25 @@ public class WorkerController {
 
     final static Logger logger = LoggerFactory.getLogger(WorkerController.class);
     @Resource
-    WorkerMapper workerMapper;
+    WorkerService workerService;
 
     @ApiOperation(value = "获取所有的值班人员信息")
     @GetMapping
     List<Worker> getWorker() {
-        return workerMapper.selectAll();
+        return workerService.selectAll();
     }
 
     @ApiOperation(value = "新增值班人员信息,需传入 ①姓名 ②密码 ③昵称")
     @PostMapping
     Integer postWorker(Worker worker) {
         worker.setOrdertime(nowTime());
-        return workerMapper.insert(worker);
+        return workerService.insert(worker);
     }
 
     @ApiOperation(value = "删除指定的值班人员")
     @DeleteMapping("/{wid}")
     Integer delReport(@PathVariable Integer wid) {
-        return workerMapper.deleteByPrimaryKey(wid);
+        return workerService.deleteByPrimaryKey(wid);
     }
 
 

@@ -1,9 +1,9 @@
 package com.jlp.controller;
 
-import com.jlp.mapper.PhotoMapper;
-import com.jlp.mapper.StrMapper;
 import com.jlp.pojo.Photo;
 import com.jlp.pojo.Str;
+import com.jlp.service.PhotoService;
+import com.jlp.service.StrService;
 import com.jlp.utils.devidePage.PageInfoImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,14 +31,14 @@ public class PhotoController {
 
     final static Logger logger = LoggerFactory.getLogger(PhotoController.class);
     @Resource
-    PhotoMapper photoMapper;
+    PhotoService photoService;
     @Resource
-    StrMapper strMapper;
+    StrService strService;
 
     @ApiOperation(value = "获取母斗图列表（斗图目录）")
     @GetMapping
     List<Photo> getPhoto(@RequestParam("now") Integer now, @RequestParam("size") Integer size) {
-        PageInfoImpl<Photo> pageInfo = new PageInfoImpl<>(photoMapper.selectPidEqualFid(), now, size);
+        PageInfoImpl<Photo> pageInfo = new PageInfoImpl<>(photoService.selectPidEqualFid(), now, size);
         pageInfo.sortContent(Comparator.comparing(Photo::getPpublishtime));
         return pageInfo.nowPage();
     }
@@ -46,7 +46,7 @@ public class PhotoController {
     @ApiOperation(value = "获取指定pfatherId的所有母子斗图（某斗图的详细内容）")
     @GetMapping("/{pfatherId}")
     List<Photo> getPhotoByFId(@PathVariable Integer pfatherId, @RequestParam("now") Integer now, @RequestParam("size") Integer size) {
-        PageInfoImpl<Photo> pageInfo = new PageInfoImpl<>(photoMapper.selectByFid(pfatherId), now, size);
+        PageInfoImpl<Photo> pageInfo = new PageInfoImpl<>(photoService.selectByFid(pfatherId), now, size);
         pageInfo.sortContent(Comparator.comparing(Photo::getPpublishtime));
         return pageInfo.nowPage();
     }
@@ -54,7 +54,7 @@ public class PhotoController {
     @ApiOperation(value = "点赞某张图片，参数为pid")
     @PutMapping("/{pid}")
     void addGreat(@PathVariable Integer pid) {
-        photoMapper.addGreat(pid);
+        photoService.addGreat(pid);
     }
 
     @ApiOperation(value = "插入", notes = "为母传入 img title desc 为子传入 img fatherId")
@@ -76,7 +76,7 @@ public class PhotoController {
 
         Str str = new Str();
         str.setStype((byte) 1);
-        strMapper.insert(str);
+        strService.insert(str);
         Photo photo = new Photo();
         photo.setPid(str.getSid());
         photo.setPpublishtime(nowTime());
@@ -85,22 +85,22 @@ public class PhotoController {
         photo.setPpubliship(getRemoteIP(request));
         photo.setPcontent(saveWorkFile(img, uploadPath));
         if (fatherId == null) {
+            logger.info("fatherId为空");
             photo.setPtitle(title);
             photo.setPdesc(desc);
             fatherId = str.getSid();
         }
         photo.setPfatherid(fatherId);
-        if (photoMapper.insert(photo) != 0) return "postPhoto success";
+        if (photoService.insert(photo) != 0) return "postPhoto success";
         else return "postPhoto failed";
     }
 
     @ApiOperation(value = "删除斗图", notes = "必须传入原始的sId串号")
     @DeleteMapping("/{sId}")
     String delPhoto(@PathVariable Integer sId) {
-        if (photoMapper.deleteByPrimaryKey(sId) != 0 && strMapper.deleteByPrimaryKey(sId) != 0)
+        if (photoService.deleteByPrimaryKey(sId) != 0 && strService.deleteByPrimaryKey(sId) != 0)
             return "delPhoto success";
         else return "delPhoto failed";
     }
-
 
 }

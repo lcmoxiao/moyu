@@ -14,5 +14,5 @@ public class NameUtils {
     public static String getName() {
         return pre[(int) (Math.random() * pre.length)];
     }
-    
+
 }

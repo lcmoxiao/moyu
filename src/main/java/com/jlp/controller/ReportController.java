@@ -2,6 +2,7 @@ package com.jlp.controller;
 
 import com.jlp.mapper.ReportMapper;
 import com.jlp.pojo.Report;
+import com.jlp.service.ReportService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -20,25 +21,25 @@ public class ReportController {
 
     final static Logger logger = LoggerFactory.getLogger(ReportController.class);
     @Resource
-    ReportMapper reportMapper;
+    ReportService reportService;
 
     @ApiOperation(value = "获取所有的举报信息")
     @GetMapping
     List<Report> getReport() {
-        return reportMapper.selectAll();
+        return reportService.selectAll();
     }
 
     @ApiOperation(value = "新增举报信息,需传入rsid rreason（举报串号 举报理由）")
     @PostMapping
     Integer postReport(Report report) {
         report.setRtime(nowTime());
-        return reportMapper.insert(report);
+        return reportService.insert(report);
     }
 
     @ApiOperation(value = "删除指定的举报")
     @DeleteMapping("/{rid}")
     Integer delReport(@PathVariable Integer rid) {
-        return reportMapper.deleteByPrimaryKey(rid);
+        return reportService.deleteByPrimaryKey(rid);
     }
 
 

@@ -3,11 +3,11 @@ package com.jlp.controller;
 import com.jlp.mapper.BraggartMapper;
 import com.jlp.mapper.MovieMapper;
 import com.jlp.mapper.PhotoMapper;
-import com.jlp.mapper.StrMapper;
 import com.jlp.pojo.Braggart;
 import com.jlp.pojo.Movie;
 import com.jlp.pojo.Photo;
 import com.jlp.pojo.Str;
+import com.jlp.service.StrService;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class StrController {
 
     final static Logger logger = LoggerFactory.getLogger(StrController.class);
     @Resource
-    StrMapper strMapper;
+    StrService strService;
     @Resource
     BraggartMapper braggartMapper;
     @Resource
@@ -38,7 +38,7 @@ public class StrController {
 
     @GetMapping("/{sid}")
     StrInfo jumpToStr(@PathVariable Integer sid) {
-        Str str = strMapper.selectByPrimaryKey(sid);
+        Str str = strService.selectByPrimaryKey(sid);
         StrInfo strInfo = new StrInfo();
         switch (str.getStype()) {
             case 0 -> {

@@ -1,9 +1,9 @@
 package com.jlp.controller;
 
-import com.jlp.mapper.MovieMapper;
-import com.jlp.mapper.StrMapper;
 import com.jlp.pojo.Movie;
 import com.jlp.pojo.Str;
+import com.jlp.service.MovieService;
+import com.jlp.service.StrService;
 import com.jlp.utils.devidePage.PageInfoImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,14 +34,14 @@ public class MovieController {
 
     final static Logger logger = LoggerFactory.getLogger(MovieController.class);
     @Resource
-    MovieMapper movieMapper;
+    MovieService movieService;
     @Resource
-    StrMapper strMapper;
+    StrService strService;
 
     @ApiOperation(value = "获取视频列表（视频目录）")
     @GetMapping
     List<Movie> getMovie(@RequestParam("now") Integer now, @RequestParam("size") Integer size) {
-        PageInfoImpl<Movie> pageInfo = new PageInfoImpl<>(movieMapper.selectPidEqualFid(), now, size);
+        PageInfoImpl<Movie> pageInfo = new PageInfoImpl<>(movieService.selectPidEqualFid(), now, size);
         pageInfo.sortContent(Comparator.comparing(Movie::getMpublishtime));
         return pageInfo.nowPage();
     }
@@ -49,7 +49,7 @@ public class MovieController {
     @ApiOperation(value = "获取指定FatherId的视频和弹幕内容")
     @GetMapping("/{fatherId}")
     List<Movie> getMovieByFId(@PathVariable Integer fatherId, @RequestParam("now") Integer now, @RequestParam("size") Integer size) {
-        PageInfoImpl<Movie> pageInfo = new PageInfoImpl<>(movieMapper.selectByFid(fatherId), now, size);
+        PageInfoImpl<Movie> pageInfo = new PageInfoImpl<>(movieService.selectByFid(fatherId), now, size);
         pageInfo.sortContent(Comparator.comparing(Movie::getMpublishtime));
         return pageInfo.nowPage();
     }
@@ -57,7 +57,7 @@ public class MovieController {
     @ApiOperation(value = "点赞某条弹幕或视频，参数为mid")
     @PutMapping("/{mid}")
     void addGreat(@PathVariable Integer mid) {
-        movieMapper.addGreat(mid);
+        movieService.addGreat(mid);
     }
 
     @ApiOperation(value = "插入", notes = "为母，传入 movie title 和desc 为子则之传入fatherId content timeInMovie")
@@ -70,8 +70,8 @@ public class MovieController {
             , @RequestParam(value = "fatherId", required = false) Integer fatherId
             , HttpServletRequest request) throws IOException {
         Str str = new Str();
-        str.setStype((byte) 1);
-        strMapper.insert(str);
+        str.setStype((byte) 2);
+        strService.insert(str);
         Movie movie = new Movie();
 
         if (fatherId == null) {
@@ -98,14 +98,14 @@ public class MovieController {
         movie.setMpublishname(getName());
         movie.setMgreat(0);
         movie.setMpubliship(getRemoteIP(request));
-        if (movieMapper.insert(movie) != 0) return "postMovie success";
+        if (movieService.insert(movie) != 0) return "postMovie success";
         else return "postMovie failed";
     }
 
     @ApiOperation(value = "删除视频", notes = "必须传入原始的sId串号")
     @DeleteMapping("/{sId}")
     String delMovie(@PathVariable Integer sId) {
-        if (movieMapper.deleteByPrimaryKey(sId) != 0 && strMapper.deleteByPrimaryKey(sId) != 0)
+        if (movieService.deleteByPrimaryKey(sId) != 0 && strService.deleteByPrimaryKey(sId) != 0)
             return "delMovie success";
         else return "delMovie failed";
     }

@@ -1,6 +1,6 @@
 package com.jlp.filter;
 
-import com.jlp.mapper.PrisonMapper;
+import com.jlp.service.PrisonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +17,13 @@ public class IPFilter implements Filter {
     private final Logger logger = LoggerFactory.getLogger(IPFilter.class);
 
     @Resource
-    PrisonMapper prisonMapper;
+    PrisonService prisonService;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String remoteIP = getRemoteIP((HttpServletRequest) servletRequest);
         logger.info(remoteIP + "=======进入过滤器===========");
-        if (prisonMapper.selectByIP(remoteIP) != null)
+        if (prisonService.selectByIP(remoteIP) != null)
             servletRequest.getRequestDispatcher("/IPerror").forward(servletRequest, servletResponse);
         else
             filterChain.doFilter(servletRequest, servletResponse);

@@ -1,6 +1,5 @@
 package com.jlp.mapper;
 
-import com.jlp.pojo.Braggart;
 import com.jlp.pojo.Photo;
 import org.apache.ibatis.annotations.Select;
 

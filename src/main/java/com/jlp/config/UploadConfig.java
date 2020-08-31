@@ -16,9 +16,9 @@ public class UploadConfig {
         String uploadFolder = "d://uploadFiles/";
         factory.setLocation(uploadFolder);
         //文件最大
-        factory.setMaxFileSize(DataSize.parse("5MB"));
+        factory.setMaxFileSize(DataSize.parse("2000MB"));
         // 设置总上传数据总大小
-        factory.setMaxRequestSize(DataSize.parse("10MB"));
+        factory.setMaxRequestSize(DataSize.parse("2000MB"));
         return factory.createMultipartConfig();
     }
 }
