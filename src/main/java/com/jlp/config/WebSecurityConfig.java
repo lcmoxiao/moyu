@@ -39,9 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/braggart/**", "/photo/**", "/movie/**"
                         , "/str/**", "/report/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/braggart/**", "/photo/**", "/movie/**"
-                        , "/str/**", "/report/**").hasAnyRole("WORK")
-                .antMatchers("/prison/**").hasAnyRole("WORK")
-                .antMatchers("/worker/**").hasAnyRole("ATM")
+                        , "/str/**", "/report/**").hasAnyAuthority("WORK", "ADMIN")
+                .antMatchers("/prison/**").hasAnyAuthority("WORK", "ADMIN")
+                .antMatchers("/worker/**").hasAnyAuthority("ADMIN")
                 //TODO 权限分配设计，没权限的提醒没权限，提醒去登录
 //                .anyRequest().authenticated()
                 .and()

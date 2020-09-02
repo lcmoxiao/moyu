@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlp.mapper.BraggartMapper">
+    <resultMap id="BaseResultMap" type="com.jlp.pojo.Braggart">
+        <id column="bId" jdbcType="INTEGER" property="bid"/>
+        <result column="bPublishTime" jdbcType="TIMESTAMP" property="bpublishtime"/>
+        <result column="bPublishIP" jdbcType="VARCHAR" property="bpubliship"/>
+        <result column="bPublishName" jdbcType="VARCHAR" property="bpublishname"/>
+        <result column="bContent" jdbcType="VARCHAR" property="bcontent"/>
+        <result column="bFatherId" jdbcType="INTEGER" property="bfatherid"/>
+        <result column="bGreat" jdbcType="INTEGER" property="bgreat"/>
+        <result column="bTitle" jdbcType="VARCHAR" property="btitle"/>
+        <result column="bDesc" jdbcType="VARCHAR" property="bdesc"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        bId, bPublishTime, bPublishIP, bPublishName, bContent, bFatherId, bGreat, bTitle,
+        bDesc
+    </sql>
+    <select id="selectBidEqualFid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from braggart
+        where bId = bFatherId
+    </select>
+
+    <select id="selectByFid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from braggart
+        where bFatherId = #{bfatherId,jdbcType=INTEGER}
+    </select>
+
+    <update id="addGreat">
+        update braggart
+        set bGreat = bGreat + 1
+        where bId = #{bid}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from braggart
+        where bId = #{bid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.jlp.pojo.Braggart">
+        insert into braggart (bId, bPublishTime, bPublishIP,
+                              bPublishName, bContent, bFatherId,
+                              bGreat, bTitle, bDesc)
+        values (#{bid,jdbcType=INTEGER}, #{bpublishtime,jdbcType=TIMESTAMP}, #{bpubliship,jdbcType=VARCHAR},
+                #{bpublishname,jdbcType=VARCHAR}, #{bcontent,jdbcType=VARCHAR}, #{bfatherid,jdbcType=INTEGER},
+                #{bgreat,jdbcType=INTEGER}, #{btitle,jdbcType=VARCHAR}, #{bdesc,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jlp.pojo.Braggart">
+        insert into braggart
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bid != null">
+                bId,
+            </if>
+            <if test="bpublishtime != null">
+                bPublishTime,
+            </if>
+            <if test="bpubliship != null">
+                bPublishIP,
+            </if>
+            <if test="bpublishname != null">
+                bPublishName,
+            </if>
+            <if test="bcontent != null">
+                bContent,
+            </if>
+            <if test="bfatherid != null">
+                bFatherId,
+            </if>
+            <if test="bgreat != null">
+                bGreat,
+            </if>
+            <if test="btitle != null">
+                bTitle,
+            </if>
+            <if test="bdesc != null">
+                bDesc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bid != null">
+                #{bid,jdbcType=INTEGER},
+            </if>
+            <if test="bpublishtime != null">
+                #{bpublishtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bpubliship != null">
+                #{bpubliship,jdbcType=VARCHAR},
+            </if>
+            <if test="bpublishname != null">
+                #{bpublishname,jdbcType=VARCHAR},
+            </if>
+            <if test="bcontent != null">
+                #{bcontent,jdbcType=VARCHAR},
+            </if>
+            <if test="bfatherid != null">
+                #{bfatherid,jdbcType=INTEGER},
+            </if>
+            <if test="bgreat != null">
+                #{bgreat,jdbcType=INTEGER},
+            </if>
+            <if test="btitle != null">
+                #{btitle,jdbcType=VARCHAR},
+            </if>
+            <if test="bdesc != null">
+                #{bdesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jlp.pojo.Braggart">
+        update braggart
+        <set>
+            <if test="bpublishtime != null">
+                bPublishTime = #{bpublishtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bpubliship != null">
+                bPublishIP = #{bpubliship,jdbcType=VARCHAR},
+            </if>
+            <if test="bpublishname != null">
+                bPublishName = #{bpublishname,jdbcType=VARCHAR},
+            </if>
+            <if test="bcontent != null">
+                bContent = #{bcontent,jdbcType=VARCHAR},
+            </if>
+            <if test="bfatherid != null">
+                bFatherId = #{bfatherid,jdbcType=INTEGER},
+            </if>
+            <if test="bgreat != null">
+                bGreat = #{bgreat,jdbcType=INTEGER},
+            </if>
+            <if test="btitle != null">
+                bTitle = #{btitle,jdbcType=VARCHAR},
+            </if>
+            <if test="bdesc != null">
+                bDesc = #{bdesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where bId = #{bid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jlp.pojo.Braggart">
+        update braggart
+        set bPublishTime = #{bpublishtime,jdbcType=TIMESTAMP},
+            bPublishIP   = #{bpubliship,jdbcType=VARCHAR},
+            bPublishName = #{bpublishname,jdbcType=VARCHAR},
+            bContent     = #{bcontent,jdbcType=VARCHAR},
+            bFatherId    = #{bfatherid,jdbcType=INTEGER},
+            bGreat       = #{bgreat,jdbcType=INTEGER},
+            bTitle       = #{btitle,jdbcType=VARCHAR},
+            bDesc        = #{bdesc,jdbcType=VARCHAR}
+        where bId = #{bid,jdbcType=INTEGER}
+    </update>
+</mapper>

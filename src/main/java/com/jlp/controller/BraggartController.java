@@ -47,7 +47,10 @@ public class BraggartController {
     @ApiOperation(value = "获取指定bfatherId的所有母子嘴炮（某详细嘴炮）")
     @GetMapping("/{bfatherId}")
     public List<Braggart> getBraggartByFId(@PathVariable Integer bfatherId, @RequestParam("now") Integer now, @RequestParam("size") Integer size) {
-        PageInfoImpl<Braggart> braggartPageInfo = new PageInfoImpl<>(braggartService.selectByFid(bfatherId), now, size);
+        logger.info("正在查询bfatherID：" + bfatherId);
+        var braggarts = braggartService.selectByFid(bfatherId);
+        logger.info("获取到了" + braggarts);
+        PageInfoImpl<Braggart> braggartPageInfo = new PageInfoImpl<>(braggarts, now, size);
         braggartPageInfo.sortContent(Comparator.comparing(Braggart::getBpublishtime));
         return braggartPageInfo.nowPage();
     }
