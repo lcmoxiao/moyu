@@ -2,6 +2,7 @@ package com.jlp.service;
 
 import com.jlp.mapper.MovieMapper;
 import com.jlp.pojo.Movie;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,8 +29,8 @@ public class MovieService {
         return movieMapper.selectByFid(fatherId);
     }
 
-    @CacheEvict(key = "'list'+#id")
-    public void addGreat(Integer id) {
+    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#fid"), @CacheEvict(key = "#id")})
+    public void addGreat(Integer id, Integer fid) {
         movieMapper.addGreat(id);
     }
 
@@ -38,8 +39,13 @@ public class MovieService {
         return movieMapper.insert(movie);
     }
 
-    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#sId")})
-    public int deleteByPrimaryKey(Integer sId) {
+    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#fid"), @CacheEvict(key = "#sId")})
+    public int deleteByPrimaryKey(Integer sId, Integer fid) {
         return movieMapper.deleteByPrimaryKey(sId);
     }
+
+    public Movie selectByMid(Integer mid) {
+       return movieMapper.selectByMid(mid);
+    }
+
 }

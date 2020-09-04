@@ -58,7 +58,7 @@ public class BraggartController {
     @ApiOperation(value = "点赞某条嘴炮，参数为bid")
     @PutMapping("/{bid}")
     public void addGreat(@PathVariable Integer bid) {
-        braggartService.addGreat(bid);
+        braggartService.addGreat(bid, braggartService.selectByKey(bid).getBfatherid());
     }
 
     @ApiOperation(value = "插入", notes = "为母传入 content title desc 为子传入 content fatherId")
@@ -91,7 +91,7 @@ public class BraggartController {
     @ApiOperation(value = "删除嘴炮", notes = "必须传入原始的sId串号")
     @DeleteMapping("/{sId}")
     public String delBraggart(@PathVariable Integer sId) {
-        if (braggartService.deleteByPrimaryKey(sId) != 0 && strService.deleteByPrimaryKey(sId) != 0)
+        if (braggartService.deleteByPrimaryKey(sId, braggartService.selectByKey(sId).getBfatherid()) != 0 && strService.deleteByPrimaryKey(sId) != 0)
             return "delBraggart success";
         else return "delBraggart failed";
     }

@@ -17,7 +17,6 @@ public class StrService {
     @Resource
     StrMapper strMapper;
 
-    @CachePut(key = "#str.sid")
     public void insert(Str str) {
         strMapper.insert(str);
     }

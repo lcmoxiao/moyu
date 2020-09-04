@@ -1,0 +1,78 @@
+*{padding: 0;margin: 0;}
+a {
+	position: relative;
+	display: inline-block;
+	text-decoration: none;
+	width: 132px;
+	height: 176px;
+}  
+.braggartAnimation {
+	position: absolute;
+    width: 132px;
+	height: 176px;
+	background: url(../img/嘴炮1.png)no-repeat center;
+	cursor: pointer;
+	transition: all 1s;
+}
+.braggartAnimation:hover {
+	transform: scale(1.1);
+}
+.photoAnimation {
+	position: absolute;
+    width: 132px;
+	height: 176px;
+	background: url(../img/图片1.png)no-repeat center;
+	cursor: pointer;
+	transition: all 1s;
+}
+.photoAnimation:hover {
+	transform: scale(1.1);
+}
+.videoAnimation {
+	position: absolute;
+    width: 132px;
+	height: 176px;
+	background: url(../img/看片1.png)no-repeat center;
+	cursor: pointer;
+	transition: all 1s;
+}
+.videoAnimation:hover {
+	transform: scale(1.1);
+}
+.dutyroomAnimation {
+	position: absolute;
+    width: 132px;
+	height: 176px;
+	background: url(../img/p1.png)no-repeat center;
+	cursor: pointer;
+	transition: all 1s;
+}
+.dutyroomAnimation:hover {
+	transform: scale(1.1);
+}
+
+.loginAnimation {
+	position: absolute;
+    width: 132px;
+	height: 176px;
+	background: url(../img/d1.png)no-repeat center;
+	cursor: pointer;
+	transition: all 1s;
+}
+.loginAnimation:hover {
+	transform: scale(1.1);
+}
+
+.darkRoomAnimation {
+	position: absolute;
+    width: 132px;
+	height: 176px;
+	background: url(../img/小黑屋1.png)no-repeat center;
+	cursor: pointer;
+	transition: all 1s;
+}
+.darkRoomAnimation:hover {
+	transform: scale(1.1);
+}
+
+

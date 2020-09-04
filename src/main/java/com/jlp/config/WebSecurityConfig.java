@@ -32,24 +32,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/static/**", "/js/**", "/css/**", "/file/**").permitAll()
-                .antMatchers("/hello", "/login", "/", "/IPerror").permitAll()
+                .antMatchers("/static/**","/img/**","/layui/**", "/jss/**", "/css/**", "/file/**").permitAll()
+                .antMatchers("/hello", "/login", "/", "/IPerror","/main").permitAll()
+                .antMatchers("/visit/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/braggart/**", "/photo/**", "/movie/**"
                         , "/str/**", "/report/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/braggart/**", "/photo/**", "/movie/**"
                         , "/str/**", "/report/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/braggart/**", "/photo/**", "/movie/**"
-                        , "/str/**", "/report/**").hasAnyAuthority("WORK", "ADMIN")
-                .antMatchers("/prison/**").hasAnyAuthority("WORK", "ADMIN")
-                .antMatchers("/worker/**").hasAnyAuthority("ADMIN")
-                //TODO 权限分配设计，没权限的提醒没权限，提醒去登录
-//                .anyRequest().authenticated()
+                        , "/str/**", "/report/**").hasAnyAuthority("WORK","ATM")
+                .antMatchers("/admin/**","/prison/**").hasAnyAuthority("WORK","ATM")
+                .antMatchers("/worker/**").hasAnyAuthority("ATM")
                 .and()
                 .formLogin()
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .failureHandler(failureHandler)
-                .loginPage("/login.html")
+                .loginPage("/error.html")
                 .loginProcessingUrl("/toLogin")
                 .successHandler(successHandler).permitAll()
                 .and()

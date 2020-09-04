@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>userManager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <script src="/jss/jquery-3.5.1.min.js"></script>
+    <script charset="utf-8" src="/layui/layui.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+
+<body class="layui-layout-body">
+
+<div id="navigator"></div>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">新增</button>
+    </div>
+</script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+
+<div id="tmpContent" style='text-align: center'></div>
+
+<script>
+
+    let index;//关闭弹窗用的
+
+    $.ready(showUserManager());
+
+    function showUserManager() {
+        $.ajax({
+            url: "http://192.168.110.119/worker",
+            method: "get",
+            success: function (res) {
+				console.log(res);
+                layui.use('table', function () {
+                    let table = layui.table;
+
+                    table.render({
+                        elem: '#test'
+                        , data: res
+                        , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+                        , defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                            title: '提示'
+                            , layEvent: 'LAYTABLE_TIPS'
+                            , icon: 'layui-icon-tips'
+                        }]
+                        , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                        , cols: [[
+                            {field: 'uid', title: '用户ID', sort: true}
+                            , {field: 'username', title: '用户名'}
+                            , {field: 'fakename', title: '昵称', sort: true},
+                            {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150}
+                        ]]
+                        , page: true
+                    });
+
+                    //监听行工具事件
+                    table.on('tool(test)', function (obj) {
+                        var data = obj.data;
+
+                        if (obj.event === 'del') {
+                            deleteUser(data.uid);
+                            obj.del();
+                        } 
+                    });
+
+                    //头工具栏事件
+                    table.on('toolbar(test)', function (obj) {
+                        if (obj.event === 'add') {
+                            showInsertUser();
+                            index = layer.open({
+                                type: 1,
+                                title: "用户信息新增",
+                                area: ['30%', '60%'],
+                                fix: false,
+                                maxmin: true,
+                                shadeClose: true,
+                                shade: 0.4,
+                                skin: 'layui-layer-rim',
+                                content: $("#tmpContent"),
+                                end: function (index, layero) {
+                                    $("#tmpContent").html("");
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+        })
+    }
+
+    function deleteUser(uId) {
+        $.post({
+            url: "http://192.168.110.119/worker/" + uId,
+            type: "delete",
+            success: function () {
+                layer.close(index);
+                layer.msg('删除ID为' + uId + '的用户成功');
+            }
+        });
+    }
+
+  
+    function showInsertUser() {
+        let tmp =
+            "\t\t<form id='mf' class=\"layui-form\">\n" +
+
+            "  <div class=\"layui-form-item\">\n" +
+            "    <label class=\"layui-form-label\">昵称</label>\n" +
+            "    <div class=\"layui-input-block\">\n" +
+            "      <input type=\"text\" name=\"fakename\" required  lay-verify=\"required\" placeholder=\"昵称\" autocomplete=\"off\" class=\"layui-input\">\n" +
+            "    </div>\n" +
+            "  </div>" +
+
+            "  <div class=\"layui-form-item\">\n" +
+            "    <label class=\"layui-form-label\">用户名</label>\n" +
+            "    <div class=\"layui-input-block\">\n" +
+            "      <input type=\"text\" name=\"username\" required  lay-verify=\"required\" placeholder=\"用户名\" autocomplete=\"off\" class=\"layui-input\">\n" +
+            "    </div>\n" +
+            "  </div>" +
+
+            "</div>" +
+            "  <div class=\"layui-form-item\">\n" +
+            "    <label class=\"layui-form-label\">用户密码</label>\n" +
+            "    <div class=\"layui-input-block\">\n" +
+            "      <input type=\"text\" name=\"password\" required  lay-verify=\"required\" placeholder=\"用户密码\" autocomplete=\"off\" class=\"layui-input\">\n" +
+            "    </div>\n" +
+            "  </div>" ;
+
+
+
+        tmp +=
+            "      </select>\n" +
+            "    </div>\n" +
+            "  </div>" +
+            "</div>" +
+
+            "\t\t\t<input type=\"button\" onclick='submitRegisterForm()' class=\"layui-btn layui-btn-warm layui-btn-sm\" value=\"注册\"><br>\n" +
+            "\t\t</form>";
+        $("#tmpContent").html(tmp);
+    }
+
+    function submitRegisterForm() {
+        $.post({
+            url: "http://192.168.110.119/worker",
+            type: "post",
+            data: $("#mf").serialize(),
+            success: function () {
+                showUserManager();
+                layer.close(index);
+                layer.msg("增加了用户");
+            }
+        });
+    }
+
+</script>
+</body>
+
+</html>

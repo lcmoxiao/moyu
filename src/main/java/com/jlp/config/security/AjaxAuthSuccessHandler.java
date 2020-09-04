@@ -23,7 +23,7 @@ public class AjaxAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandle
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.info("Authentication success, {} login successfully", request.getParameter("username"));
         response.setStatus(HttpServletResponse.SC_OK);
-        response.sendRedirect("/swagger-ui.html");
+        response.sendRedirect("/admin/main_Admin.html");
     }
 
 }

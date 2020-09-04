@@ -28,6 +28,5 @@ public class IPFilter implements Filter {
         else
             filterChain.doFilter(servletRequest, servletResponse);
     }
-
-
+    
 }

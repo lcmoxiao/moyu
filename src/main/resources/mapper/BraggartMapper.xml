@@ -36,11 +36,6 @@
         where bId = #{bid}
     </update>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete
-        from braggart
-        where bId = #{bid,jdbcType=INTEGER}
-    </delete>
     <insert id="insert" parameterType="com.jlp.pojo.Braggart">
         insert into braggart (bId, bPublishTime, bPublishIP,
                               bPublishName, bContent, bFatherId,

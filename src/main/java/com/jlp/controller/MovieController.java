@@ -57,14 +57,14 @@ public class MovieController {
     @ApiOperation(value = "点赞某条弹幕或视频，参数为mid")
     @PutMapping("/{mid}")
     void addGreat(@PathVariable Integer mid) {
-        movieService.addGreat(mid);
+        movieService.addGreat(mid, movieService.selectByMid(mid).getMfatherid());
     }
 
     @ApiOperation(value = "插入", notes = "为母，传入 movie title 和desc 为子则之传入fatherId content timeInMovie")
     @PostMapping
     String postMovie(@RequestParam(value = "movie", required = false) MultipartFile mfile
             , @RequestParam(value = "title", required = false) String title
-            , @RequestParam(value = "desc", required = false) String desc
+            , @RequestParam(value = "desc", required = false) MultipartFile desc
             , @RequestParam(value = "content", required = false) String content
             , @RequestParam(value = "timeInMovie", required = false) Date timeInMovie
             , @RequestParam(value = "fatherId", required = false) Integer fatherId
@@ -79,13 +79,13 @@ public class MovieController {
             String uploadPath = "d://uploadFiles/" + File.separator + "/movie";
             File dir;
             dir = new File(uploadPath);
-            logger.info("图片上传路径为" + uploadPath);
+            logger.info("视频上传路径为" + uploadPath);
             if (!dir.exists()) {
                 logger.warn("新建" + dir.getName());
                 logger.warn("新建文件夹结果" + dir.mkdirs());
             }
             movie.setMtitle(title);
-            movie.setMdesc(desc);
+            movie.setMdesc(saveWorkFile(desc, uploadPath));
             movie.setMpublishtime(nowTime());
             movie.setMcontent(saveWorkFile(mfile, uploadPath));
             movie.setMfatherid(str.getSid());
@@ -105,10 +105,9 @@ public class MovieController {
     @ApiOperation(value = "删除视频", notes = "必须传入原始的sId串号")
     @DeleteMapping("/{sId}")
     String delMovie(@PathVariable Integer sId) {
-        if (movieService.deleteByPrimaryKey(sId) != 0 && strService.deleteByPrimaryKey(sId) != 0)
+        if (movieService.deleteByPrimaryKey(sId,movieService.selectByMid(sId).getMfatherid()) != 0 && strService.deleteByPrimaryKey(sId) != 0)
             return "delMovie success";
         else return "delMovie failed";
     }
-
 
 }

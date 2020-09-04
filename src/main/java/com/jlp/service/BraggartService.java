@@ -2,6 +2,7 @@ package com.jlp.service;
 
 import com.jlp.mapper.BraggartMapper;
 import com.jlp.pojo.Braggart;
+import org.apache.ibatis.annotations.Delete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
@@ -32,9 +33,9 @@ public class BraggartService {
         return braggartMapper.selectByFid(bfatherId);
     }
 
-    @CacheEvict(key = "'list'+#bid")
-    public void addGreat(Integer bid) {
-        braggartMapper.addGreat(bid);
+    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#fid"), @CacheEvict(key = "#id")})
+    public void addGreat(Integer id, Integer fid) {
+        braggartMapper.addGreat(id);
     }
 
     @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#braggart.bfatherid")})
@@ -42,8 +43,12 @@ public class BraggartService {
         return braggartMapper.insert(braggart);
     }
 
-    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#sId")})
-    public int deleteByPrimaryKey(Integer sId) {
+    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#fid"), @CacheEvict(key = "#sId")})
+    public int deleteByPrimaryKey(Integer sId, Integer fid) {
         return braggartMapper.deleteByPrimaryKey(sId);
+    }
+
+    public Braggart selectByKey(Integer bid) {
+        return braggartMapper.selectByKey(bid);
     }
 }

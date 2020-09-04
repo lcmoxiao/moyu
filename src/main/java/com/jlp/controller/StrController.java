@@ -43,15 +43,17 @@ public class StrController {
         switch (str.getStype()) {
             case 0 -> {
                 logger.info("查的是嘴炮");
-                strInfo.bs.addAll(braggartMapper.selectByBid(sid));
+                strInfo.bs.add(braggartMapper.selectByKey(sid));
             }
             case 1 -> {
                 logger.info("查的是斗图");
-                strInfo.ps.addAll(photoMapper.selectByPid(sid));
+                strInfo.ps.add(photoMapper.selectByKey(sid));
+                strInfo.infoType = 1;
             }
             case 2 -> {
                 logger.info("查的是看片");
-                strInfo.ms.addAll(movieMapper.selectByMid(sid));
+                strInfo.infoType = 2;
+                strInfo.ms.add(movieMapper.selectByMid(sid));
             }
         }
         return strInfo;

@@ -3,12 +3,15 @@ package com.jlp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @Controller
 public class HomeController {
 
     @RequestMapping(value = "/")
-    String defualt() {
-        return "/hello";
+    void defualt(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/visit/main.html");
     }
 
     @RequestMapping(value = "/hello")

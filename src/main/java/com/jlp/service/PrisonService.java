@@ -24,12 +24,12 @@ public class PrisonService {
         return prisonMapper.selectByIP(remoteIP);
     }
 
-    @Caching(put = {@CachePut(key = "'list'+#prison.pip")}, evict = {@CacheEvict(key = "'listAll'")})
+    @Caching(put = {@CachePut(key = "#prison.pip")}, evict = {@CacheEvict(key = "'listAll'")})
     public Integer insert(Prison prison) {
         return prisonMapper.insert(prison);
     }
 
-    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#pid")})
+    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "#pid")})
     public Integer deleteByPrimaryKey(Integer pid) {
         return prisonMapper.deleteByPrimaryKey(pid);
     }

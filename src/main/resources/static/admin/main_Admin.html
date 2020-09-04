@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html style="background: linear-gradient(#88cae6, #e050e5);height: 100%;">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/css/mainAnimation.css" />
+		<link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+		<script src="/layui/layui.js"></script>
+		<title>摸鱼社区</title>
+	</head>
+	<body >
+		<div style="text-align: center;margin-top: 100px;">
+			<img src="/img/title.png" />
+		</div>
+		<div id="" style="margin: 10%;text-align: center;margin-top: 50px;">
+			<div id="">
+				<div class="item" id="braggart" style="float: left;width: 33.3%;">
+					<div class="braggartAnimationContent">
+						<a href="braggart.html">
+							<div class="braggartAnimation" onmouseover="braggartOver(this)" onmouseout="braggartOut(this)">
+							</div>
+						</a>
+					</div>
+				</div>
+					
+				<!--斗图模块-->
+				<div class="item" id="picture" style="float: left;width: 33.3%;" >
+					<div class="photoAnimationContent">
+						<a href="photo.html">
+							<div class="photoAnimation" onmouseover="photoOver(this)" onmouseout="photoOut(this)">
+							</div>
+						</a>
+					</div>
+				</div>
+				
+				<!--看片模块-->
+				<div class="item" id="video" style=" float: left;width: 33.3%;" >
+					<div class="videoAnimationContent">
+						<a href="movieList.html">
+							<div class="videoAnimation" onmouseover="videoOver(this)" onmouseout="videoOut(this)">
+							</div>
+						</a>
+					</div>
+				</div>
+				
+				<!--值班室模块-->
+				<div class="item" id="picture" style="float: left;width: 33.3%;margin-top: 100px;" >
+					<div class="dutyroomAnimationContent">
+						<a href="dutyRoom.html">
+							<div class="dutyroomAnimation" onmouseover="dutyroomOver(this)" onmouseout="dutyroomOut(this)">
+							</div>
+						</a>
+					</div>
+				</div>
+				
+				<!--登陆模块-->
+				<div class="item" id="picture" style="float: left;width: 33.3%;margin-top: 100px;" >
+					<div class="dutyroomAnimationContent">
+						<a onclick="login()">
+							<div class="loginAnimation" onmouseover="loginOver(this)" onmouseout="loginOut(this)">
+							</div>
+						</a>
+					</div>
+				</div>
+				
+				<!--小黑屋模块-->
+				<div class="item" id="picture" style="float: left;width: 33.3%;margin-top: 100px;" >
+					<div class="dutyroomAnimationContent">
+						<a href="prisonManager.html">
+							<div class="darkRoomAnimation" onmouseover="darkRoomOver(this)" onmouseout="darkRoomOut(this)">
+							</div>
+						</a>
+					</div>
+				</div>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		/* 嘴炮 */
+		function braggartOver(x){
+			setTimeout(braggartOver1,250,x);
+		}
+		function braggartOver1(x){
+			x.style.background = "url(/img/嘴炮2.png)";
+			setTimeout(braggartOver2,250,x);
+		}
+		function braggartOver2(x){
+			x.style.background = "url(/img/嘴炮3.png)"
+		}
+		function braggartOut(x){
+			x.style.background = "url(/img/嘴炮1.png)";
+		}
+		/* 图片 */
+		function photoOver(x){
+			setTimeout(photoOver1,250,x);
+		}
+		function photoOver1(x){
+			x.style.background = "url(/img/图片2.png)";
+			setTimeout(photoOver2,250,x);
+		}
+		function photoOver2(x){
+			x.style.background = "url(/img/图片3.png)"
+		}
+		function photoOut(x){
+			x.style.background = "url(/img/图片1.png)";
+		}
+		/* 视频 */
+		function videoOver(x){
+			setTimeout(videoOver1,250,x);
+		}
+		function videoOver1(x){
+			x.style.background = "url(/img/看片2.png)";
+			setTimeout(videoOver2,250,x);
+		}
+		function videoOver2(x){
+			x.style.background = "url(/img/看片3.png)"
+		}
+		function videoOut(x){
+			x.style.background = "url(/img/看片1.png)";
+		}
+		/* 值班室 */
+		function dutyroomOver(x){
+			setTimeout(dutyroomOver1,250,x);
+		}
+		function dutyroomOver1(x){
+			x.style.background = "url(/img/p2.png)";
+			setTimeout(dutyroomOver2,250,x);
+		}
+		function dutyroomOver2(x){
+			x.style.background = "url(/img/p3.png)"
+		}
+		function dutyroomOut(x){
+			x.style.background = "url(/img/p1.png)";
+		}
+		/* 登陆 */
+		function loginOver(x){
+			setTimeout(loginOver1,250,x);
+		}
+		function loginOver1(x){
+			x.style.background = "url(/img/d2.png)";
+			setTimeout(loginOver2,250,x);
+		}
+		function loginOver2(x){
+			x.style.background = "url(/img/d3.png)"
+		}
+		function loginOut(x){
+			x.style.background = "url(/img/d1.png)";
+		}
+		/* 小黑屋 */
+		function darkRoomOver(x){
+			setTimeout(darkRoomOver1,250,x);
+		}
+		function darkRoomOver1(x){
+			x.style.background = "url(/img/小黑屋2.png)";
+			setTimeout(darkRoomOver2,250,x);
+		}
+		function darkRoomOver2(x){
+			x.style.background = "url(/img/小黑屋3.png)"
+		}
+		function darkRoomOut(x){
+			x.style.background = "url(/img/小黑屋1.png)";
+		}
+		
+		
+		function login(){
+			let loginLayer = "<div style='width: 300px;padding-top: 3.125rem;padding-right: 4.375rem;padding-bottom: 3.125rem;'>" +
+			"<form class=\"form\" action=\"/toLogin\" method=\"post\">"+
+			"<div class='layui-form-item'>"+
+			"<label class='layui-form-label'>用户名：</label>"+
+			"<div class='layui-input-block'>"+
+			"<input type='text' name='username' required  lay-verify='required' placeholder='请输入用户名' autocomplete='off' class='layui-input'>"+
+			"</div>"+
+			"</div>"+
+			
+			"<div class='layui-form-item'>"+
+			"<label class='layui-form-label'>密码：</label>"+
+			"<div class='layui-input-block'>"+
+			"<input type='password' name='password' required  lay-verify='required' placeholder='请输入用户名' autocomplete='off' class='layui-input'>"+
+			"</div>"+
+			"</div>"+
+			
+			"<div class='layui-form-item' align='center'>\n" +
+			"<div class='layui-input-block'>\n" +
+			"<input type='submit' class='layui-btn' value='登陆'>\n" +
+			"</div>\n" +
+			"</div>\n" +
+			
+			"</form>"+
+			"</div>";
+			layui.use('layer',function(){
+				layer.ready(function(){
+					var index = layer.open({
+						type:1,
+						title:"管理员登陆",
+						area:["30%,30%"],
+						shadeClose: true,
+						content:loginLayer,
+						end:function(index,layer){
+							
+						}
+					});
+				})
+			});
+		}
+	</script>
+</body>
+</html>

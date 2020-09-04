@@ -1,0 +1,188 @@
+*{padding: 0;margin: 0;}
+
+
+/**头部*/
+.top{
+	background-color: #f2aac9;
+	color: #fefefe;
+	width: 60%;
+	margin: auto;
+	text-align: center;
+	height: 100px;
+	line-height: 100px;
+}
+
+/**导航*/
+.braggartNavigation{
+	height: 50px;
+	width: 60%;
+	margin: auto;
+	background-color: #f2c9c9;
+}
+
+
+/**内容*/
+/**嘴炮,Content共用*/
+.braggartMenu{
+	width: 60%;
+	margin-left: 20%;
+}
+.braggartContent{
+	width: 60%;
+	height: 100%;
+	margin-left: 20%;
+}
+.braggartContent img{
+	width: 80%;
+	padding-top: 4px;padding-bottom: 4px;
+}
+.outputTop{
+	border: #e6e6e6 1px solid;border-bottom: none;text-align: center;padding-top: 2px;padding-bottom: 2px;font-size: 20px;
+}
+.outputTime{
+	border: #e6e6e6 1px solid;border-bottom: none;text-align: right;padding-top: 2px;padding-bottom: 2px;font-size: 12px;
+}
+.outputBottom{
+	border: #e6e6e6 1px solid;text-align: center;padding-top: 2px;padding-bottom: 2px;font-size: 16px;
+}
+.joinBraggart{
+	margin-top: 2px;
+	width: 60%;
+	height: 100%;
+	margin-left: 20%;
+	border: #e6e6e6 1px solid;
+}
+.braggartOuputTop{
+	border-bottom: none;text-align: left;padding-top: 2px;padding-bottom: 2px;font-size: 16px;display: inline;
+}
+.braggartOutputTime{
+	border-bottom: none;border-top: none; text-align: right;padding-top: 2px;padding-bottom: 2px;font-size: 16px;display: inline;
+}
+.braggartOutputBottom{
+	border-top: none;text-align: left; padding-top: 2px;padding-bottom: 2px;font-size: 16px;
+}
+
+/**图片*/
+.photoOuputTop{
+	border-bottom: none;text-align: left;padding-top: 2px;padding-bottom: 2px;font-size: 16px;
+}
+.photoOutputTime{
+	border-bottom: none;border-top: none; text-align: right;padding-top: 2px;padding-bottom: 2px;font-size: 12px;
+}
+.photoOutputBottom{
+	border-top: none; text-align: center;padding-top: 2px;padding-bottom: 2px;font-size: 16px;
+}
+
+
+.joinFightPhoto{
+	margin: auto;
+	
+	border: #e6e6e6 1px solid;
+}
+.photoContent img{
+	width: 80%;
+	padding-top: 4px;padding-bottom: 4px;
+}
+.setimage{
+	position: relative;
+	width: 33.3%;  //图片固定宽度
+	height: 100%;   //图片固定高度度
+	background: black;
+	float: left;
+}
+.setimage img{
+	margin-top: 10%;
+	padding-bottom: 1%;
+}
+
+
+.photoContentTop span{
+	color: #0000FF;
+}
+.joinFightPhoto input{
+	margin-left: 8%;
+}
+
+/**按钮*/
+.backButton{
+	width: 50px;
+	height: 36px;
+	text-align: center;
+	font-size: 10px;
+	color: white;
+	border-radius: 3px;
+	background-color: #363d40;
+	border: 1px solid white;
+}
+.clickDetailButton{
+	border-style: none;
+	background:none;
+
+}
+.delPhotoButton{
+	width: 84%;
+	margin-left: 8%;
+	margin-bottom: 4%;
+	height: 26px;
+	font-size: 10px;
+	color: white;
+	border-radius: 3px;
+	background-color: #6f7e84;
+	border: 1px solid white;
+}
+
+.delBraggartButton,.submitPhotoButton,.submitBraggartButton{
+	width: 84%;
+	margin-bottom: 2px;
+	margin-top: 2px;
+	height: 26px;
+	font-size: 10px;
+	color: white;
+	border-radius: 3px;
+	background-color: #6f7e84;
+	border: 1px solid white;
+}
+.delBraggartButton{
+	width: 32px;
+	height: 22px;
+	margin-right: 3px;
+	margin-top: -1px;
+}
+.addBraggartButton,.addFhotoButton{
+	width: 50px;
+	height: 36px;
+	text-align: center;
+	font-size: 10px;
+	color: white;
+	border-radius: 3px;
+	background-color: #ffaaff;
+	border: 1px solid white;
+}
+
+/**文本*/
+.joinbBraggartContent{
+	width: 80%;
+	height: 60px;
+	vertical-align:top;
+}
+.textareaAlign{
+	vertical-align:top;
+}
+#addBraggart{
+	text-align: center;
+}
+#addBraggart input,textarea{
+	width: 60%;
+	margin-top: 2px;
+}
+.textareaAlign{
+	margin-top: 2px;
+	margin-left: 2px;
+}
+#addPhoto{
+	text-align: center;
+}
+#addPhoto input{
+	width: 60%;
+	margin-top: 2px;
+}

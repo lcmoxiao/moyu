@@ -54,7 +54,8 @@ public class PhotoController {
     @ApiOperation(value = "点赞某张图片，参数为pid")
     @PutMapping("/{pid}")
     void addGreat(@PathVariable Integer pid) {
-        photoService.addGreat(pid);
+        Integer fid = photoService.selectByKey(pid).getPfatherid();
+        photoService.addGreat(pid, fid);
     }
 
     @ApiOperation(value = "插入", notes = "为母传入 img title desc 为子传入 img fatherId")
@@ -98,7 +99,7 @@ public class PhotoController {
     @ApiOperation(value = "删除斗图", notes = "必须传入原始的sId串号")
     @DeleteMapping("/{sId}")
     String delPhoto(@PathVariable Integer sId) {
-        if (photoService.deleteByPrimaryKey(sId) != 0 && strService.deleteByPrimaryKey(sId) != 0)
+        if (photoService.deleteByPrimaryKey(sId,photoService.selectByKey(sId).getPfatherid()) != 0 && strService.deleteByPrimaryKey(sId) != 0)
             return "delPhoto success";
         else return "delPhoto failed";
     }

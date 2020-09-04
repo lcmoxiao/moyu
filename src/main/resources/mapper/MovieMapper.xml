@@ -33,11 +33,7 @@
         set mGreat = mGreat + 1
         where mId = #{mId}
     </update>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
-        delete
-        from movie
-        where mId = #{mid,jdbcType=TINYINT}
-    </delete>
+
     <insert id="insert" parameterType="com.jlp.pojo.Movie">
         insert into movie (mId, mPublishTime, mPublishIP,
                            mPublishName, mContent, mFatherId,

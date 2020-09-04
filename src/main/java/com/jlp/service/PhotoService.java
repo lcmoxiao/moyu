@@ -2,6 +2,7 @@ package com.jlp.service;
 
 import com.jlp.mapper.PhotoMapper;
 import com.jlp.pojo.Photo;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,14 +24,19 @@ public class PhotoService {
         return photoMapper.selectPidEqualFid();
     }
 
+    @Cacheable(key = "#pid")
+    public Photo selectByKey(Integer pid) {
+        return photoMapper.selectByKey(pid);
+    }
+
     @Cacheable(key = "'list'+#fatherId")
     public List<Photo> selectByFid(Integer fatherId) {
         return photoMapper.selectByFid(fatherId);
     }
 
-    @CacheEvict(key = "'list'+#pid")
-    public void addGreat(Integer pid) {
-        photoMapper.addGreat(pid);
+    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#fid"), @CacheEvict(key = "#id")})
+    public void addGreat(Integer id, Integer fid) {
+        photoMapper.addGreat(id);
     }
 
     @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#photo.pfatherid")})
@@ -38,8 +44,8 @@ public class PhotoService {
         return photoMapper.insert(photo);
     }
 
-    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#sId")})
-    public int deleteByPrimaryKey(Integer sId) {
+    @Caching(evict = {@CacheEvict(key = "'listAll'"), @CacheEvict(key = "'list'+#fid"), @CacheEvict(key = "#sId")})
+    public int deleteByPrimaryKey(Integer sId, Integer fid) {
         return photoMapper.deleteByPrimaryKey(sId);
     }
 }
